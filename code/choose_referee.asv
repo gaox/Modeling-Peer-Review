@@ -1,0 +1,4 @@
+function [referee] = choose_referee(min_id, max_id, exclude_id)
+    referee(1) = rand()
+end
+

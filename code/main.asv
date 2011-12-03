@@ -1,0 +1,19 @@
+f_random = [0, 0.1, 0.2];
+f_rational = 0:0.1:0.9;
+
+MAX_TIMESTEP = 500;
+SCIENTIST_NUM = 1000;
+
+distcomp.feature( 'LocalUseMpiexec', false );
+matlabpool open 2
+
+for i = f_random
+    for j = 1:length(f_rational)
+        if (i + f_rational(j) > 1)
+            continue;
+        end
+        simulate(MAX_TIMESTEP, SCIENTIST_NUM, i, f_rational(j));
+    end
+end
+
+%matlabpool close
