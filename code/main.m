@@ -1,5 +1,5 @@
 f_random = 0;
-f_rational = 0:0.1:0.7;
+f_rational = 0;
 alpha = 0;
 
 MAX_TIMESTEP = 500;
