@@ -84,26 +84,25 @@ for i = 1:MAX_TIMESTEP
                     decision = decision + 1;
                 end
             end
-            
-            if (decision > REFEREE_PER_PAPER / 2)
-                accept = 1;
-            elseif (decision < REFEREE_PER_PAPER / 2)
-                accept = 0;
+        end
+        if (decision > REFEREE_PER_PAPER / 2)
+            accept = 1;
+        elseif (decision < REFEREE_PER_PAPER / 2)
+            accept = 0;
+        else
+            accept = randi(2, 1) - 1;
+        end
+
+        if (accept == 1)
+            accept_num = accept_num + 1;
+            all_quality(accept_num) = paper_quality;
+            quality_acceptted(floor(paper_quality)) = quality_acceptted(floor(paper_quality)) + 1;
+            if (in_network(j))
+                accept_num_nw = accept_num_nw + 1;
+                all_quality_nw(accept_num_nw) = paper_quality;
             else
-                accept = randi(2, 1) - 1;
-            end
-            
-            if (accept == 1)
-                accept_num = accept_num + 1;
-                all_quality(accept_num) = paper_quality;
-                quality_acceptted(floor(paper_quality)) = quality_acceptted(floor(paper_quality)) + 1;
-                if (in_network(j))
-                    accept_num_nw = accept_num_nw + 1;
-                    all_quality_nw(accept_num_nw) = paper_quality;
-                else
-                    accept_num_no_nw = accept_num_no_nw + 1;
-                    all_quality_no_nw(accept_num_no_nw) = paper_quality;
-                end
+                accept_num_no_nw = accept_num_no_nw + 1;
+                all_quality_no_nw(accept_num_no_nw) = paper_quality;
             end
         end
     end

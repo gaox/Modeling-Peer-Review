@@ -6,11 +6,11 @@ MAX_TIMESTEP = 500;
 SCIENTIST_NUM = 1000;
 
 tic;
-distcomp.feature( 'LocalUseMpiexec', false );
-matlabpool open 4;
+%distcomp.feature( 'LocalUseMpiexec', false );
+%matlabpool open 4;
 
 for i = f_random
-    parfor j = 1:length(f_rational)
+    for j = 1:length(f_rational)
         if (i + f_rational(j) > 1)
             continue;
         end
@@ -18,5 +18,5 @@ for i = f_random
     end
 end
 
-matlabpool close;
+%matlabpool close;
 toc

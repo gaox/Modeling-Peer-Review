@@ -67,7 +67,6 @@ end
 saveas(fig, '../doc/figure/no_network_comparison.eps', 'psc2');
 
 %% plot the paper accept number and qualities when there are many journals
-MAX_TIMESTEP = 500;
 JOURNAL_NUM = 4;
 threshold = [110, 100, 90, 80];
 
@@ -84,13 +83,43 @@ end
 
 bar(y);
 for i = 1:JOURNAL_NUM
-    line([i - 0.4, i + 0.4], [threshold(i), threshold(i)], 'Color', 'r', 'LineWidth', 2);
+    line([i - 0.4, i + 0.4], [threshold(i), threshold(i)], 'Color', 'g', 'LineWidth', 2, 'LineStyle', '--');
     %plot(x, threshold(i), '-r', 'LineWidth', 10);
 end
 set(gca,'xtick',1:4);
 xlabel('journal');
 ylabel('average quality');
-xlim([0 5])
+xlim([0 5]);
 ylim([60 140]);
 
 saveas(fig, '../doc/figure/mj_avg_quality_100_0_0_0.eps', 'psc2');
+
+%% plot the paper accept number and qualities when there are many journals
+%  now include relationship of scientists
+MAX_TIMESTEP = 500;
+JOURNAL_NUM = 4;
+threshold = [110, 100, 90, 80];
+
+load('../data/mj_rela_100_0_0_0/acc_num_r_100_0_0_0_50', 'acc_num_r');
+load('../data/mj_rela_100_0_0_0/avg_quality_100_0_0_0_50', 'avg_quality');
+fig = figure();
+set(gca, 'FontSize', 16);
+hold on;
+
+y = zeros(1, JOURNAL_NUM);
+for i = 1:JOURNAL_NUM
+    y(i) = mean(avg_quality(i));
+end
+
+bar(y);
+for i = 1:JOURNAL_NUM
+    line([i - 0.4, i + 0.4], [threshold(i), threshold(i)], 'Color', 'g', 'LineWidth', 2, 'LineStyle', '--');
+    %plot(x, threshold(i), '-r', 'LineWidth', 10);
+end
+set(gca,'xtick',1:4);
+xlabel('journal');
+ylabel('average quality');
+xlim([0 5]);
+ylim([60 140]);
+
+saveas(fig, '../doc/figure/mj_rela_avg_quality_100_0_0_0_50.eps', 'psc2');

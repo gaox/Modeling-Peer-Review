@@ -20,7 +20,9 @@ STD_AC_NUM = 5;
 JOURNAL_NUM = 4;
 MEAN_AC_NUM = [50, 100, 200, 300];
 
-threshold = [120, 110, 100, 0];
+PROB = 0.5;
+
+threshold = [110, 100, 90, 80];
 
 author_type = zeros(1, SCIENTIST_NUM);
 IQ = zeros(1, SCIENTIST_NUM);
@@ -48,7 +50,15 @@ all_paper_acc_num = zeros(1, JOURNAL_NUM);
 acc_num_r = zeros(JOURNAL_NUM, MAX_TIMESTEP);
 max_ac_num = zeros(1, JOURNAL_NUM);
 
+author_accept = zeros(JOURNAL_NUM, SCIENTIST_NUM);
+num_author_accept = zeros(JOURNAL_NUM, 1);
+is_author_accept = zeros(JOURNAL_NUM, SCIENTIST_NUM);
+
+%editors = assign_editor(SCIENTIST_NUM, JOURNAL_NUM);
+%relation = generate_relationship(SCIENTIST_NUM, PROB);
+
 for i = 1:MAX_TIMESTEP
+    fprintf('%d\n', i);
     accept_num = zeros(1, JOURNAL_NUM);
     papers = zeros(JOURNAL_NUM, SCIENTIST_NUM);
     for j = 1:JOURNAL_NUM
@@ -57,13 +67,31 @@ for i = 1:MAX_TIMESTEP
     
     for j = 1:SCIENTIST_NUM
         paper_quality = normrnd(IQ(j), STDDEV_QUALITY);
-        referee = choose_referee(SCIENTIST_NUM, j);
+        if (paper_quality < threshold(JOURNAL_NUM))
+            continue;
+        end
+        for p = 1:JOURNAL_NUM
+            if (paper_quality >= threshold(p))
+                if (num_author_accept(p) >= 1)
+                    referee = choose_referee(author_accept(p, :), num_author_accept(p), SCIENTIST_NUM, j);
+                else
+                    referee = choose_referee_random(SCIENTIST_NUM, j);
+                end
+                break;
+            end
+        end
+        
+        assert(referee(1) ~= j, 'choose referee wrong referee(1) == j');
+        assert(referee(2) ~= j, 'choose referee wrong referee(2) == j');
+        assert(referee(1) ~= referee(2), 'choose referee wrong referee(1) == referee(2)');
         decision = 0;
 
         for k = 1:REFEREE_PER_PAPER
             qmin = IQ(referee(k));
             if (in_network(referee(k)) == 1 && in_network(j) == 1)
                 decision = decision + 1;
+            %elseif (relation(referee(k), j) == 1)
+            %    decision = decision + 1;
             elseif (author_type(referee(k)) == CORRECT_REFEREE)
                 if (paper_quality >= qmin)
                     decision = decision + 1;
@@ -83,14 +111,18 @@ for i = 1:MAX_TIMESTEP
             else
                 accept = randi(2, 1) - 1;
             end
-            
-            if (accept == 1)
-                for p = 1:JOURNAL_NUM
-                    if (paper_quality >= threshold(p))
-                        accept_num(p) = accept_num(p) + 1;
-                        papers(p, accept_num(p)) = paper_quality;
-                        break;
+        end
+        if (accept == 1)
+            for p = 1:JOURNAL_NUM
+                if (paper_quality >= threshold(p))
+                    accept_num(p) = accept_num(p) + 1;
+                    papers(p, accept_num(p)) = paper_quality;
+                    if (is_author_accept(p, j) == 0)
+                        author_accept(p, num_author_accept(p) + 1) = j;
+                        %author_accept(p)
+                        num_author_accept(p) = num_author_accept(p) + 1;
                     end
+                    break;
                 end
             end
         end
@@ -113,7 +145,7 @@ for i = 1:MAX_TIMESTEP
     end
 end
 
-filecode = [int2str(F_CORRECT * 100), '_', int2str(F_RANDROM * 100), '_', int2str(F_RATIONAL * 100), '_', int2str(alpha * 100)];
+filecode = [int2str(F_CORRECT * 100), '_', int2str(F_RANDROM * 100), '_', int2str(F_RATIONAL * 100), '_', int2str(alpha * 100), '_', int2str(PROB * 100)];
 folder = ['../data/mj_', filecode];
 mkdir(folder);
 save([folder, '/avg_quality_', filecode], 'avg_quality');
