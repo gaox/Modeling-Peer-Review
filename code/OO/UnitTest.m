@@ -43,5 +43,21 @@ for i = 1:5
     end
 end
 
+%% Test ThurnerScientist
+clear;
 
+scientist = ThurnerScientist(1, 100, 1);
+
+%% Test ThurnerWorld
+clear;
+tic;
+tworld = ThurnerWorld(1000, 1, 500, 0, 0, 1, 0, 0);
+toc;
+%% Test ThurnerSimulator
+clear;
+tic;
+world = ThurnerWorld(1000, 1, 500, 0, 0, 1, 0, 0);
+simulator = ThurnerSimulator();
+world.simulate_world();
+toc;
 %% ------------- END OF CODE --------------

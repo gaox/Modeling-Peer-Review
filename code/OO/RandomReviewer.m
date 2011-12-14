@@ -20,7 +20,7 @@
 % ETH Zurich, Dept. of Computer Science
 % Email: gaox@ethz.ch 
 % Created: December 2011
-% Last revision: 13-Dec-2011
+% Last revision: 14-Dec-2011
 
 %------------- BEGIN CODE --------------
 
@@ -30,6 +30,8 @@ classdef RandomReviewer < Reviewer
         num_reviewer_pool;
         num_reviewer_chosen;
         reviewers;
+        
+        min_quality;
     end
     
     methods
@@ -67,8 +69,16 @@ classdef RandomReviewer < Reviewer
             decision = 0;
             for i = 1:obj.num_reviewer_chosen
                 index = reviewers_chosen(i);
-                if paper.quality >= obj.reviewers(index).intelligence
-                    decision = decision + 1;
+                if obj.reviewers(index).type == ThurnerScientist.RATIONAL_REFEREE
+                    if paper.quality >= obj.reviewers(index).intelligence
+                        decision = decision + 1;
+                    end
+                elseif obj.reviewers(index).type == ThurnerScientist.CORRECT_REFEREE
+                    if (paper.quality >= obj.min_quality)
+                        decision = decision + 1;
+                    end
+                else
+                    decision = decision + randi(2, 1) - 1;
                 end
             end
             if decision > obj.num_reviewer_chosen / 2
