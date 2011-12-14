@@ -1,29 +1,30 @@
+% RandomReviewer Class
+%
+% Description
+% Reviewer provide the method to choose reviewer for the journal to
+% review papers and make the decision to accept or reject papers.
+%
+% RandomReviewer Properties:
+% num_reviewer_pool   - The total number of reviewers. All the scientists
+%                       in the world can review paper.
+% num_reviewer_chosen - The number of reviewers needed to review one
+%                       paper.
+% reviewers           - Reference to all available reviewers.
+%
+% RandomReviewer Methods:
+% review              - Randomly choose (I must be kidding you) reviewer 
+%                       for the journal and review papers.
+% choose_reviewer     - Choose the reviewers randomly.
+
 % Author: Xiang Gao
 % ETH Zurich, Dept. of Computer Science
 % Email: gaox@ethz.ch 
 % Created: December 2011
-% Last revision: 12-Dec-2011
+% Last revision: 13-Dec-2011
 
 %------------- BEGIN CODE --------------
 
 classdef RandomReviewer < Reviewer
-    
-    % RandomReviewer Class
-    %
-    % Description
-    % Reviewer provide the method to choose reviewer for the journal to
-    % review papers and make the decision to accept or reject papers.
-    %
-    % Properties of RandomReviewer
-    % num_reviewer_pool   : the total number of reviewers. All the scientists
-    %                       in the world can review paper.
-    % num_reviewer_chosen : the number of reviewers needed to review one
-    %                       paper.
-    % reviewers           : reference to all available reviewers.
-    %
-    % Methods of RandomReviewer
-    % review              : Randomly choose (I must be kidding you) reviewer 
-    %                       for the journal and review papers.
     
     properties
         num_reviewer_pool;
@@ -32,8 +33,12 @@ classdef RandomReviewer < Reviewer
     end
     
     methods
+        function obj = RandomReviewer(num_reviewer_pool, ...
+                                      num_reviewer_chosen, ...
+                                      reviewers)
         % Constructor: Construct the RandomReviewer object, return the obj
         %              handle.
+        %
         % Input:
         %   num_reviewer_pool      - the total number of reviewers.
         %   num_reviewer_chosen    - the number of reviewers needed to 
@@ -42,9 +47,6 @@ classdef RandomReviewer < Reviewer
         %
         % Output:
         %   obj                    - the handle of the created reviewer object.
-        function obj = RandomReviewer(num_reviewer_pool, ...
-                                      num_reviewer_chosen, ...
-                                      reviewers)
             if nargin > 0
                 obj.num_reviewer_pool = num_reviewer_pool;
                 obj.num_reviewer_chosen = num_reviewer_chosen;
@@ -52,6 +54,7 @@ classdef RandomReviewer < Reviewer
             end
         end
         
+        function accept = review(obj, ~, paper)
         % review: Randomly choose reviewers to review the paper. If the
         %         reviewer's decision ties, accept it randomly.
         %
@@ -60,7 +63,6 @@ classdef RandomReviewer < Reviewer
         %   paper           - the handle of the reviewed paper.
         % Output:
         %   accept          - 1 if the paper is accepted, 0 if rejected.
-        function accept = review(obj, ~, paper)
             reviewers_chosen = obj.choose_reviewer(paper);
             decision = 0;
             for i = 1:obj.num_reviewer_chosen
@@ -76,16 +78,17 @@ classdef RandomReviewer < Reviewer
             else
                 accept = randi(2, 1) - 1;
             end
-        end % end of function
+        end
         
+        function reviewers_chosen = choose_reviewer(obj, paper)
         % choose_reviewer: Randomly choose the reviewers to review the paper. 
         %                  The reviewer should not be the author himself.
         %                  The algorithm is based on Knuth shuffle.
+        %
         % Input:
         %   paper            - the handle of the reviewed paper.
         % Output:
         %   reviewers_chosen - the chosen reviewers.
-        function reviewers_chosen = choose_reviewer(obj, paper)
             reviewers_pool = 1:obj.num_reviewer_pool;
             pool_size = obj.num_reviewer_pool;
             reviewers_chosen = zeros(1, obj.num_reviewer_chosen);
@@ -101,7 +104,7 @@ classdef RandomReviewer < Reviewer
                 pool_size = pool_size - 1;
             end
         end
-    end % end of methods
+    end
     
 end
 

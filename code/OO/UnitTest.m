@@ -1,11 +1,11 @@
+% This file contains all the test case used in the development.
+% Scripts are organized in cell mode in order to be called on demand.
+
 % Author: Xiang Gao
 % ETH Zurich, Dept. of Computer Science
 % Email: gaox@ethz.ch 
 % Created: December 2011
-% Last revision: 12-Dec-2011
-
-% This file contains all the test case used in the development.
-% Scripts are organized in cell mode in order to be called on demand.
+% Last revision: 13-Dec-2011
 
 %------------- BEGIN CODE --------------
 
