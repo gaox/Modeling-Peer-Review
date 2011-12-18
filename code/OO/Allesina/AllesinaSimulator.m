@@ -7,4 +7,3 @@ classdef AllesinaSimulator < Simulator
     end
     
 end
-

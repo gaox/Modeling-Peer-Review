@@ -7,4 +7,3 @@ classdef AllesinaWorld < World
     end
     
 end
-

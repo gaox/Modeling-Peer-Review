@@ -296,7 +296,31 @@ In Figure \ref{fig:t4}, we show the behavior of whole the peer review process wi
 
 Before, all the experiments are run with parameter $\alpha = 0$. In Figure \ref{fig:t5}, we set $\alpha = 1$, which will increase the minimum quality of accepted papers slightly. From the results we see that the average quality decreases, it is explained in Thurner's paper that this phenomenon is due to the number of paper accepted by correct referees decreases, but those accepted by rational reviewers remain the same.
 
+\begin{figure}[H]
+    \begin{center}
+    \resizebox{7cm}{!}{\includegraphics{../figure/Thurner/acc_num_100_0_0_0.eps}}
+    \caption{Average accepted quality vs accepted numbers. The reviewers are all correct ones.}
+    \label{fig:t6}
+    \end{center}
+\end{figure}
+
+Finally, we show some drawbacks of this model. In Figure \ref{fig:t1}, we see the average quality of accepted paper grows higher and higher. But that is not always the case, the average quality increases means in the next round the acceptance standard will increase, if the standard is very high, the accepted paper is very few. From Figure \ref{fig:t6} (b), we can confirm this. And this case is not realistic, since journal always publish more or less the same number of papers in one issue. If we the model for a long time, there will even occur that no paper will be accepted, and the average quality will drop to zero. And this is fatal. Anyway, we do not have time to fix this bug in an interesting way, we put it here just to show some possible ways to extend the model.
+
 \section{Lessons and Experiences}
+\begin{description}
+\item[Start early] \hfill \\
+Actually, we did not expect to spend too much time on this project. But this project turned out to be a lot of work. We started in December, just two weeks before the deadline, and at that time we did not even install MATLAB in the laptop. After one week development, we noticed that we did not have time to extend the existing model to a new one, so we can only implement an existing model and reproduce their work to show our framework works.
+
+\item[Plan to throw one away] \hfill \\
+The initial version of our code developed in the first week was very ugly and hard to read and maintain. When we wanted to add new features to the existing code, it became a torture, that is the reason we decided to rewrite all the code. The lesson is that you must think carefully what you are going to do now and what you might do in the future. And make sure you have kept it simple. Otherwise, you will throw your code away, anyhow.
+
+\item[Don't repeat yourself] \hfill \\
+When the author developed this code, there were not any good examples to refer. So we decided to build the "world" from scratch. We hope this can help further students interested in this topic save some time if they want to extend existing model.
+
+\item[Summary and outlook] \hfill \\
+In conclusion, the goal of our framework is to be extendable, reusable, and parallelized. Currently we have Thurner's model and Allesina's model \cite{allesina2009} (only implemented the six building blocks, call for coder to implement the world and simulator) in our github repository. We are happy to see more models added to this repository.
+
+\end{description}
 
 \renewcommand{\refname}{\section{References}}
 \bibliography{report}
@@ -307,7 +331,7 @@ Before, all the experiments are run with parameter $\alpha = 0$. In Figure \ref{
 \section{Appendix}
 \appendix
 \section{Source Code}
-All the source code used developed during this project can be accessed from \url{https://github.com/gaox/Modeling-Peer-Review}.
+All the source code used developed during this project can be accessed from \url{https://github.com/gaox/Modeling-Peer-Review}. I put the code used in this paper below.
 
 \lstinputlisting{../../code/OO/common/World.m}
 \lstinputlisting{../../code/OO/common/Simulator.m}
@@ -327,12 +351,12 @@ All the source code used developed during this project can be accessed from \url
 \lstinputlisting{../../code/OO/Thurner/NaiveSubmitter.m}
 \lstinputlisting{../../code/OO/Thurner/RandomReviewer.m}
 
-\lstinputlisting{../../code/OO/Allesina/AllesinaScientist.m}
-\lstinputlisting{../../code/OO/Allesina/AllesinaPaper.m}
-\lstinputlisting{../../code/OO/Allesina/AllesinaJournal.m}
-\lstinputlisting{../../code/OO/Allesina/AllesinaProducer.m}
-\lstinputlisting{../../code/OO/Allesina/AllesinaSubmitter.m}
-\lstinputlisting{../../code/OO/Allesina/AllesinaReviewer.m}
-\lstinputlisting{../../code/OO/Allesina/AllesinaZeta.m}
-\lstinputlisting{../../code/OO/Allesina/AllesinaACPro.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaScientist.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaPaper.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaJournal.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaProducer.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaSubmitter.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaReviewer.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaZeta.m}
+%\lstinputlisting{../../code/OO/Allesina/AllesinaACPro.m}
 \end{document}
