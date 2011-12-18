@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Introduction and Motivations}{4}
+\contentsline {section}{\numberline {2}Six Building Blocks for Modeling Peer Review}{4}
+\contentsline {section}{\numberline {3}Design and Implementation}{6}
+\contentsline {subsection}{\numberline {3.1}Class Design}{6}
+\contentsline {subsection}{\numberline {3.2}Work Flow}{7}
+\contentsline {subsection}{\numberline {3.3}Code Style}{7}
+\contentsline {section}{\numberline {4}Example}{8}
+\contentsline {subsection}{\numberline {4.1}Thurner's Model: Introduction}{8}
+\contentsline {subsection}{\numberline {4.2}Thurner's Model: Results and Discussion}{9}
+\contentsline {section}{\numberline {5}Lessons and Experiences}{12}
+\contentsline {section}{\numberline {6}References}{13}
+\contentsline {section}{\numberline {7}Appendix}{14}
+\contentsline {section}{\numberline {A}Source Code}{14}
