@@ -7,7 +7,7 @@
 % Last revision: 14-Dec-2011
 
 f_random = 0;
-f_rational = 0;
+f_rational = [0, 0.1];
 
 lambda = 0;
 alpha = 0;

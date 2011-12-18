@@ -98,7 +98,7 @@ classdef ThurnerWorld < World
                     end
                 end
                 for i = obj.num_journals:-1:1
-                    obj.journals(i) = Journal(i, 0);
+                    obj.journals(i) = Journal(i);
                 end
                 obj.producer = GaussianProducer(ThurnerWorld.STDDEV_QUALITY);
                 obj.submitter = NaiveSubmitter(obj.journals);

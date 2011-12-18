@@ -53,11 +53,18 @@ clear;
 tic;
 tworld = ThurnerWorld(1000, 1, 500, 0, 0, 1, 0, 0);
 toc;
+
 %% Test ThurnerSimulator
 clear;
 tic;
 world = ThurnerWorld(1000, 1, 500, 0, 0, 1, 0, 0);
 simulator = ThurnerSimulator();
 world.simulate_world();
+toc;
+
+%% Test AllesinaJournal
+clear;
+tic;
+AJournal = AllesinaJournal(1, 1, 1, 50, 50, 5, 5);
 toc;
 %% ------------- END OF CODE --------------

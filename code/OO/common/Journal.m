@@ -6,8 +6,6 @@
 %
 % Journal Properties:
 % id          - The unique value to identify the journal.
-% impact      - The importance of the journal, can be seen as a impact
-%               factor.
 %
 % Journal Methods:
 % review_paper - Arrange reviewers to review paper.
@@ -24,11 +22,10 @@ classdef Journal < handle
     
     properties
         id;
-        impact;
     end
     
     methods
-        function obj = Journal(id, impact)
+        function obj = Journal(id)
         % Constructor: Construct the Journal object, return the obj handle.
         %
         % Input:
@@ -38,7 +35,6 @@ classdef Journal < handle
         %   obj             - the handle of the created Journal object.
             if nargin > 0
                 obj.id = id;
-                obj.impact = impact;
             end
         end
         

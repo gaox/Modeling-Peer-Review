@@ -1,7 +1,7 @@
 % RandomReviewer Class
 %
 % Description
-% Reviewer provide the method to choose reviewer for the journal to
+% RandomReviewer provide the method to choose reviewer for the journal to
 % review papers and make the decision to accept or reject papers. The
 % algorithm is used in Thurner's model.
 %
@@ -11,6 +11,8 @@
 % num_reviewer_chosen - The number of reviewers needed to review one
 %                       paper.
 % reviewers           - Reference to all available reviewers.
+% min_threshold       - Minimum quality can be accepted by rational
+%                       reviewers.
 %
 % RandomReviewer Methods:
 % review              - Randomly choose (I must be kidding you) reviewer 
@@ -36,6 +38,7 @@ classdef RandomReviewer < Reviewer
         reviewers;
         
         min_quality;
+        min_threshold = 90;
     end
     
     methods
@@ -74,7 +77,8 @@ classdef RandomReviewer < Reviewer
             for i = 1:obj.num_reviewer_chosen
                 index = reviewers_chosen(i);
                 if obj.reviewers(index).type == ThurnerScientist.RATIONAL_REFEREE
-                    if paper.quality >= obj.reviewers(index).intelligence
+                    if paper.quality <= obj.reviewers(index).intelligence && ...
+                            paper.quality >= obj.min_threshold
                         decision = decision + 1;
                     end
                 elseif obj.reviewers(index).type == ThurnerScientist.CORRECT_REFEREE

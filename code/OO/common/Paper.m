@@ -7,7 +7,6 @@
 %
 % Paper Properties:
 % author_id - The identification of the author.
-% quality   - An integer value to represent the quality of the paper
 % id        - A unique id to identify the paper.
 
 % Author: Xiang Gao
@@ -22,12 +21,11 @@ classdef Paper < handle
     
     properties
         author_id;
-        quality;
         id;
     end
     
     methods
-        function obj = Paper(author_id, quality)
+        function obj = Paper(author_id)
         % Constructor: Construct the Paper object, return the obj handle.
         %
         % Input:
@@ -36,7 +34,6 @@ classdef Paper < handle
         %   obj             - the handle of the created Paper object.
             if nargin > 0
                 obj.author_id = author_id;
-                obj.quality = quality;
             end
         end
     end

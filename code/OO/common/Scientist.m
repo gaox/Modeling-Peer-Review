@@ -7,8 +7,6 @@
 %
 % Scientist Properties:
 % id            - The unique value to identify the scientist.
-% intelligence  - Namely, the IQ of a scientist, this will influcen the 
-%                 paper quality produced by the scientist.
 %
 % Scientist Methods:
 % produce_paper - The scientist finish writing a paper.
@@ -26,22 +24,19 @@ classdef Scientist < handle
     
     properties
         id;
-        intelligence;
     end
     
     methods
-        function obj = Scientist(id, intelligence)
+        function obj = Scientist(id)
         % Constructor: Construct the Scientist object, return the obj
         %              handle.
         %
         % Input:
         %   id              - the unique id of the scientist.
-        %   intelligence    - the initial intelligence of the scientist.
         % Output:
         %   obj             - the handle of the created scientist object.
             if nargin > 0
                 obj.id = id;
-                obj.intelligence = intelligence;
             end
         end
         

@@ -51,7 +51,7 @@ classdef GaussianProducer < Producer
         % Output:
         %   paper           - the paper produced for the scientist.
             quality = ceil(normrnd(scientist.intelligence, obj.stddev));
-            paper = Paper(scientist.id, quality);
+            paper = ThurnerPaper(scientist.id, quality);
         end
     end
     

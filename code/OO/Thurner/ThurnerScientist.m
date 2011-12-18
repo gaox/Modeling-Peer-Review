@@ -28,6 +28,7 @@ classdef ThurnerScientist < Scientist
     
     properties
         type;
+        intelligence;
     end
     
     methods

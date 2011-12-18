@@ -9,14 +9,13 @@
 % journal   - The only journal in the world for publication.
 %
 % NaiveSubmitter Methods:
-% submit    - Produce the a paper for the scientist, the quality obeys 
-%             gaussian distribution.
+% submit    - Submit the paper to the only journal.
 
 % Author: Xiang Gao
 % ETH Zurich, Dept. of Computer Science
 % Email: gaox@ethz.ch 
 % Created: December 2011
-% Last revision: 13-Dec-2011
+% Last revision: 18-Dec-2011
 
 %------------- BEGIN CODE --------------
 
